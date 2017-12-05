@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>信工院积分管理系统-登录</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/normalize.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/demo.css}" />
+<!--必要样式-->
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/component2.css}" />
+<!--[if IE]-->
+<script type="text/javascript" th:src="@{/static/js/html5.js}"></script>
+<!--[endif]-->
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+          
+    var logout = [[${logoutMessage}]];
+    if (logout !== null && logout !== undefined && logout !== '') { 
+	  	alert(logout);
+    } 
+
+/*]]>*/
+</script>
+</head>
+<body>
+	<div class="container demo-1">
+		<div class="content">
+			<div id="large-header" class="large-header">
+				<canvas id="demo-canvas"></canvas>
+				<div class="logo_box">
+					<form th:action="@{/base/login.do}"  th:object="${ImsUser}"  th:method="post">
+						<div class="titile"><span>登&nbsp;&nbsp;录</span></div>
+						<div class="name"><i class="user"></i><input type="text"  name="studentId"   placeholder="请输入学号" required oninvalid="setCustomValidity('请输入学号');" oninput="setCustomValidity('');"/></div>
+				        <div class="pass">
+				        	<i class="pwd"></i>
+				              <input type="password"  placeholder="请输入密码"  id="begin" required oninvalid="setCustomValidity('请输入密码');" oninput="setCustomValidity('');" />
+				              <input type="hidden" name="password" id="end" />
+				        </div>
+			            <div class="msg"><sapn th:text="${loginMessage}"></sapn></div>
+						<div class="submit"><input type="submit" value="Sign  In"/> <span><a class="forget" th:href="@{/base/passWord.do}">忘记密码？</a></span></div>
+					</form>		
+				</div>
+			</div>		
+		</div>		
+	</div>
+	
+	<!-- /container -->
+	<script type="text/javascript" th:src="@{/static/js/TweenLite.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/EasePack.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/rAF.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/demo-1.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/jquery.md5.js}"></script>
+	<script type="text/javascript">
+	    $(function(){
+		   $("#begin").blur(function(){
+		     var begin = $(this).val();
+		     var beginval = $.md5(begin);
+		     var str=beginval.substring(4,12);
+		     $("#end").val(str);
+		    });  
+		   
+		   $('form').submit(function(){
+	    	 $("#begin").blur();
+	       });
+		      
+	     });   
+	</script>
+	
+	</body>
+</html>
