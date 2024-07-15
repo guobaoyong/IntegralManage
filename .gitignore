@@ -2,8 +2,8 @@
 .project
 
 .settings/
-
-
+.idea/
+.myeclipse/
 
 # Compiled class file  java
 *.class
